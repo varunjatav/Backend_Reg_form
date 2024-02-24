@@ -13,7 +13,8 @@ const registrationSchema = new mongoose.Schema({
     age: String,
     gender: String,
     address:String,
-    courses: String
+    courses: String,
+    courseType: String
 });
 
 const Registration = mongoose.model('registrations', registrationSchema);
@@ -26,6 +27,7 @@ async function main() {
         // console.log(data);
         server.post('/demo',async (req,res)=> {
             try {
+              console.log(req.body);
                 var registration = new Registration();
                 registration.name = req.body.name;
                 registration.email = req.body.email;
@@ -34,6 +36,7 @@ async function main() {
                 registration.gender = req.body.gender;
                 registration.address = req.body.address;
                 registration.courses = req.body.courses;
+                registration.courseType = req.body.courseType;
                 console.log("Registration Obj : ",registration);
                 
                 const doc = await registration.save();
@@ -70,7 +73,7 @@ var transporter = nodemailer.createTransport({
     from: data.email,
     to: 'mohit.mohit979@gmail.com , paramcomputers.jhs@gmail.com',
     subject: 'Mail Regards Admission of Students',
-    text: "A new Student with name : "+ data.name + " , Date of Birth : " + data.date + " , Age : " + data.age + " , Gender : " + data.gender + " , Address : " + data.address + " , Course : " + data.courses + " , Email : " + data.email,
+    text: "A new Student with name : "+ data.name + " , Date of Birth : " + data.date + " , Age : " + data.age + " , Gender : " + data.gender + " , Address : " + data.address +" , Course Type : " + data.courseType + " , Course : " + data.courses + " , Email : " + data.email,
   };
   
   transporter.sendMail(mailOptions, function(error, info){
