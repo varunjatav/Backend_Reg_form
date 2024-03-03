@@ -24,7 +24,7 @@ async function main() {
     //  await Registration.insertMany(student1);
     console.log(`MongoDB host: ${mongoose.connection.host}`);
     // console.log(data);
-    server.post("/demo", async (req, res) => {
+    server.post("/register", async (req, res) => {
       try {
         console.log(req.body);
         var registration = new Registration();
@@ -129,7 +129,7 @@ server.use(cors());
 
 server.use(bodyParser.json());
 
-server.get("/demo", (req, res) => {
+server.get("/register", (req, res) => {
   res.json(postedData);
 });
 server.listen(port, () => {
